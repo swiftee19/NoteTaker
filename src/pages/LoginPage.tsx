@@ -1,12 +1,15 @@
 import {useState} from "react";
 import {AlertTypes} from "../helper/alertTypes.ts";
 import {Alert} from "../components/Alert.tsx";
+import {UserController} from "../controllers/userController.ts";
 
 function LoginPage() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [alertType, setAlertType] = useState<AlertTypes | null>(null)
     const [alertMessage, setAlertMessage] = useState<string>("")
+
+    const userController = new UserController();
 
     const closeAlert = () => {
         setAlertType(() => null)
@@ -17,11 +20,18 @@ function LoginPage() {
         setAlertType(() => type)
         setAlertMessage(() => message)
     }
+
     const login = async () => {
         if (email === "" || password === "") {
             showAlert(AlertTypes.ERROR, "Please input all fields!")
             return
         }
+
+        if (userController.login(email, password) === null) {
+            showAlert(AlertTypes.ERROR, "User not found!")
+            return
+        }
+
         showAlert(AlertTypes.SUCCESS, "Login successful!")
     }
 
@@ -58,6 +68,8 @@ function LoginPage() {
                     className={"w-2/5 bg-primary py-1 text-quaternary font-bold rounded-lg shadow-md duration-300 border-2 border-quaternary hover:bg-quaternary hover:text-primary"}
                     onClick={() => login()}>Login
                 </button>
+                <a href="/signin" className={"text-quaternary hover:underline hover:cursor-pointer"}>Create an
+                    account</a>
             </div>
         </>
     )
