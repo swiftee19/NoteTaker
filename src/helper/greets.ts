@@ -21,7 +21,8 @@ const greetings = [
     'Hallo',
     'Hei',
     'Ahoj',
-    'Kumusta'
+    'Kumusta',
+    'My sunshine'
 ];
 
 export function getRandomGreetings() {

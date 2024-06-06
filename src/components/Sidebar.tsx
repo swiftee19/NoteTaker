@@ -18,7 +18,7 @@ function Sidebar() {
             <div className={"h-screen w-max p-4 flex flex-col gap-1 justify-start rounded-r-lg bg-secondary"}>
                 <h2 className={"font-bold text-lg text-quinary text-left"}>{greetings}, {user.name}</h2>
                 <button
-                    className={"flex [&>img]:hover: flex-row gap-1 items-center justify-start w-full px-2 py-1 rounded-lg bg-primary text-quinary duration-300 hover:bg-quaternary hover:text-primary hover:first:h-12"}>
+                    className={"sidebar-button"}>
                     <img src="/src/assets/plus_icon.svg" alt={"plus icon"} className={"h-6"}/>
                     <h3 className={"font-medium text-lg w-fit"}>New Note</h3>
                 </button>

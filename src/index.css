@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.sidebar-button{
+    @apply flex [&>img]:invert-[20%] [&>img]:sepia-[59%] [&>img]:saturate-[4853%] [&>img]:hue-rotate-[33deg] [&>img]:brightness-[97%] [&>img]:contrast-[102%] flex-row gap-1 items-center justify-start w-full px-2 py-1 rounded-lg bg-primary text-quinary duration-300 hover:bg-quaternary hover:text-primary [&>img]:hover:invert-[98%] [&>img]:hover:sepia-[100%] [&>img]:hover:saturate-[254%] [&>img]:hover:hue-rotate-[337deg] [&>img]:hover:brightness-[108%] [&>img]:hover:contrast-[104%];
 }
-
