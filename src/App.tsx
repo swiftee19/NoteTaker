@@ -1,5 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.tsx";
+import TestPage from "./pages/TestPage.tsx";
 
 function App() {
     return (
@@ -10,7 +11,7 @@ function App() {
                 }/>
                 <Route path={'/test'} element={
                     <>
-                        <p>test</p>
+                        <TestPage/>
                     </>
                 }/>
             </Routes>
