@@ -24,6 +24,6 @@ function PrivateRoute(props: PrivateRouteProps) {
             {props.element}
         </>
     );
-};
+}
 
 export default PrivateRoute;
