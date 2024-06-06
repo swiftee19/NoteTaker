@@ -1,6 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.tsx";
 import TestPage from "./pages/TestPage.tsx";
+import SigninPage from "./pages/SigninPage.tsx";
 
 function App() {
     return (
@@ -8,6 +9,9 @@ function App() {
             <Routes>
                 <Route path={'/'} element={
                     <LoginPage/>
+                }/>
+                <Route path={'/signin'} element={
+                    <SigninPage/>
                 }/>
                 <Route path={'/test'} element={
                     <>
