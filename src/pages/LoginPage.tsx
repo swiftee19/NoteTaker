@@ -1,15 +1,29 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AlertTypes} from "../helper/alertTypes.ts";
 import {Alert} from "../components/Alert.tsx";
 import {UserController} from "../controllers/userController.ts";
+import {getRandomQuote} from "../helper/quotes.ts";
 
 function LoginPage() {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [alertType, setAlertType] = useState<AlertTypes | null>(null)
     const [alertMessage, setAlertMessage] = useState<string>("")
+    const [randomQuote, setRandomQuote] = useState<string>("")
 
     const userController = new UserController();
+
+    useEffect(() => {
+        setRandomQuote(() => getRandomQuote());
+    }, []);
+
+    useEffect(() => {
+        if (alertType !== null) {
+            setTimeout(() => {
+                closeAlert();
+            }, 3000);
+        }
+    }, [alertType]);
 
     const closeAlert = () => {
         setAlertType(() => null)
@@ -43,20 +57,19 @@ function LoginPage() {
                 <div className={"w-2/5 flex flex-row shadow-md rounded-2xl"}>
                     <div className={"w-2/5 bg-white flex flex-col justify-center items-center rounded-l-2xl p-4"}>
                         <img className={"w-1/2"} src="/src/assets/pencil_icon.svg"/>
-                        <p className={"text-quaternary text-center w-full"}>Things worth sharing are notes worth
-                            taking</p>
+                        <p className={"text-quaternary text-center w-full"}>{randomQuote}</p>
                     </div>
                     <form
                         className={"w-full bg-secondary flex flex-col justify-center items-start rounded-r-2xl p-2 gap-2"}>
                         <div className={"w-full flex flex-row gap-1"}>
-                            <label htmlFor={"email"} className={"text-xl font-bold w-40"}>Email</label>
+                            <label htmlFor={"email"} className={"text-lg font-bold w-40"}>Email</label>
                             <input type={"email"} id={"email"} className={"rounded-lg bg-primary p-1 w-full"}
                                    value={email} placeholder={"Enter your email here"} onChange={(event) => {
                                 setEmail(event.target.value)
                             }}/>
                         </div>
                         <div className={"w-full flex flex-row gap-1"}>
-                            <label htmlFor={"password"} className={"text-xl font-bold w-40"}>Password</label>
+                            <label htmlFor={"password"} className={"text-lg font-bold w-40"}>Password</label>
                             <input type={"password"} id={"password"} className={"rounded-lg bg-primary p-1 w-full"}
                                    value={password} placeholder={"Enter your password here"} onChange={(event) => {
                                 setPassword(event.target.value)
