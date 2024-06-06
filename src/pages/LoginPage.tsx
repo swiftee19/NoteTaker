@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import {AlertTypes} from "../helper/alertTypes.ts";
 import {Alert} from "../components/Alert.tsx";
-import {UserController} from "../controllers/userController.ts";
 import {getRandomQuote} from "../helper/quotes.ts";
+import {useAuth} from "../auth/AuthProvider.tsx";
+import {useNavigate} from "react-router-dom";
 
 function LoginPage() {
     const [email, setEmail] = useState<string>("")
@@ -11,7 +12,14 @@ function LoginPage() {
     const [alertMessage, setAlertMessage] = useState<string>("")
     const [randomQuote, setRandomQuote] = useState<string>("")
 
-    const userController = new UserController();
+    const authContext = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (authContext.loading === false && authContext.user !== null) {
+            navigate("/home")
+        }
+    }, [authContext.user, authContext.loading]);
 
     useEffect(() => {
         setRandomQuote(() => getRandomQuote());
@@ -41,12 +49,13 @@ function LoginPage() {
             return
         }
 
-        if (userController.login(email, password) === null) {
+        if (authContext.login(email, password) === null) {
             showAlert(AlertTypes.ERROR, "User not found!")
             return
         }
 
         showAlert(AlertTypes.SUCCESS, "Login successful!")
+        navigate("/home")
     }
 
     return (
