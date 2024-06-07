@@ -1,10 +1,14 @@
-class Note {
+import {v4 as uuidv4} from 'uuid';
+
+export class Note {
+    id: string;
     title: string;
     content: string;
     userId: string;
 
-    constructor(title: string, content: string, userId: string) {
-        this.title = title;
+    constructor(content: string, userId: string) {
+        this.id = uuidv4();
+        this.title = 'Untitled';
         this.content = content;
         this.userId = userId;
     }

@@ -4,6 +4,7 @@ import TestPage from "./pages/TestPage.tsx";
 import SigninPage from "./pages/SigninPage.tsx";
 import {AuthProvider} from "./auth/AuthProvider.tsx";
 import PrivateRoute from "./PrivateRoute.tsx";
+import HomePage from "./pages/HomePage.tsx";
 
 function App() {
     return (
@@ -21,8 +22,11 @@ function App() {
                             <TestPage/>
                         </>
                     }/>
+                    <Route path={'/home/:noteId'} element={
+                        <PrivateRoute path="/home" element={<HomePage/>}/>
+                    }/>
                     <Route path={'/home'} element={
-                        <PrivateRoute path="/home" element={<TestPage/>}/>
+                        <PrivateRoute path="/home" element={<HomePage/>}/>
                     }/>
                 </Routes>
             </AuthProvider>

@@ -8,31 +8,89 @@ export class UserRepository {
         this.db = new CookieStorage();
     }
 
+    getAllUsers() {
+        if (this.db === null) return null;
+        const userCookie = this.db.getCookie("users");
+
+        if (userCookie === null) return null;
+
+        const userCookieDataList = userCookie.split('|');
+
+        if (userCookieDataList === null) return null;
+
+        const users: User[] = [];
+
+        for (let i = 0; i < userCookieDataList.length; i++) {
+            const user = JSON.parse(userCookieDataList[i]);
+            users.push(user);
+        }
+
+        return users;
+    }
+
     getUserByEmail(email: string) {
         if (this.db === null) return null;
-        const cookies = this.db.getAllCookies();
+        const userCookie = this.db.getCookie("users");
 
-        const cookieList = cookies.split(';');
-        for (let i = 0; i < cookieList.length; i++) {
-            const cookie = cookieList[i];
-            const cookieContent = cookie.split('=')[1];
-            const user:User = JSON.parse(cookieContent);
+        if (userCookie === null) return null;
 
+        const userCookieDataList = userCookie.split('|');
+
+        if (userCookieDataList === null) return null;
+
+        for (let i = 0; i < userCookieDataList.length; i++) {
+            const user:User = JSON.parse(userCookieDataList[i]);
             if (user.email === email) {
                 return user;
             }
         }
+
         return null;
     }
 
     getUserById(userId: string) {
-        if (this.db === null) return
-        return this.db.getCookie(userId)
+        if (this.db === null) return null;
+        const userCookie = this.db.getCookie("users");
+
+        if (userCookie === null) return null;
+
+        const userCookieDataList = userCookie.split('|');
+
+        if (userCookieDataList === null) return null;
+
+        for (let i = 0; i < userCookieDataList.length; i++) {
+            const user:User = JSON.parse(userCookieDataList[i]);
+            if (user.id === userId) {
+                return user;
+            }
+        }
+
+        return null;
     }
 
     saveUser(user: User) {
         if (this.db === null) return
-        this.db.setCookie(user.id, JSON.stringify(user), 1)
+        const userList: User[] = []
+        const currentUsers = this.getAllUsers()
+
+        userList.push(user)
+        if (currentUsers !== null) {
+            for (let i = 0; i < currentUsers.length; i++) {
+                userList.push(currentUsers[i])
+            }
+        }
+
+        let userString = ""
+
+        for (let i = 0; i < userList.length; i++) {
+            const user = userList[i]
+            userString += JSON.stringify(user)
+            if (i !== userList.length - 1) {
+                userString += "|"
+            }
+        }
+
+        this.db.setCookie("users", userString, 1)
     }
 
     deleteUser(userId: string) {

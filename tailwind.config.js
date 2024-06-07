@@ -13,6 +13,7 @@ export default {
             quinary: "#b24100",
             white: "#ffffff",
             black: "#000000",
+            transluscent: "#00000080",
             gray: "#cdc9c9",
             successText: "#166025",
             successBg: "#7edc8c",
