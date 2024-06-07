@@ -16,9 +16,6 @@ export class UserService {
         const notes = this.noteController.getAllNotes();
         if (notes === null) return null
 
-        console.log(notes)
-        console.log(userId)
-        console.log(notes.filter(note => note.userId === userId))
         return notes.filter(note => note.userId === userId);
     }
 }
