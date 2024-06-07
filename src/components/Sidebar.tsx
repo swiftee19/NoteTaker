@@ -6,7 +6,7 @@ import {NoteController} from "../controllers/noteController.ts";
 import {useNavigate} from "react-router-dom";
 import NoteSidebarCard from "./NoteSidebarCard.tsx";
 
-function Sidebar({userNotes, authContext, fetchNote}: { userNotes: Note[], authContext: any, fetchNote: ()=>void }) {
+function Sidebar({userNotes, authContext, fetchNote}: { userNotes: Note[], authContext: any, fetchNote: () => void }) {
     const [greetings, setGreetings] = useState("")
 
     const user: User = authContext.user;
@@ -38,14 +38,13 @@ function Sidebar({userNotes, authContext, fetchNote}: { userNotes: Note[], authC
                 </button>
                 <h2 className={"font-bold text-lg text-quinary text-left w-fit"}>Created Notes</h2>
                 <div className={"w-full h-[44rem] flex flex-col gap-4 overflow-y-scroll py-4"}>
-                    {
-                        userNotes.map((note) => {
-                            return (
-                                <>
-                                    <NoteSidebarCard noteId={note.id} noteTitle={note.title}/>
-                                </>
-                            )
-                        })
+                    {userNotes.map((note) => {
+                        return (
+                            <>
+                                <NoteSidebarCard noteId={note.id} noteTitle={note.title}/>
+                            </>
+                        )
+                    })
                     }
                 </div>
                 <button className={"logout-button"} onClick={() => logout()}>

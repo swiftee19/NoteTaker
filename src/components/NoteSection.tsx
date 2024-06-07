@@ -3,10 +3,11 @@ import {Note} from "../helper/note.ts";
 import {NoteController} from "../controllers/noteController.ts";
 import {useNavigate} from "react-router-dom";
 
-function NoteSection({noteId, noteController, fetchNotes}: {
-    noteId: string | undefined,
+function NoteSection({noteId, noteController, fetchNotes, userId}: {
+    noteId: string,
     noteController: NoteController,
-    fetchNotes: () => void
+    fetchNotes: () => void,
+    userId: string
 }) {
     const [noteTitle, setNoteTitle] = useState<string>("")
     const [noteContent, setNoteContent] = useState<string>("")
@@ -20,7 +21,49 @@ function NoteSection({noteId, noteController, fetchNotes}: {
                 setNoteContent(() => note.content)
             }
         }
-    }, [])
+    }, [noteId]);
+
+    useEffect(() => {
+        let currentNoteContent = noteContent;
+        let currentNoteTitle = noteTitle;
+
+        // make currentNoteContent safe for JSON.parse
+        if (currentNoteContent.includes("|")) {
+            currentNoteContent = currentNoteContent.replace(/\|/g, " ");
+        }
+        if (currentNoteTitle.includes("|")) {
+            currentNoteTitle = currentNoteTitle.replace(/\|/g, " ");
+        }
+        if (currentNoteContent.includes(";")) {
+            currentNoteContent = currentNoteContent.replace(";", " ");
+        }
+        if (currentNoteTitle.includes(";")) {
+            currentNoteTitle = currentNoteTitle.replace(";", " ");
+        }
+
+        console.log(currentNoteContent)
+        console.log(currentNoteTitle)
+
+
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            const note: Note = {
+                id: noteId,
+                title: currentNoteTitle,
+                content: currentNoteContent,
+                userId: userId
+            }
+            noteController.saveNote(note)
+            fetchNotes();
+            event.preventDefault();
+            event.returnValue = ''; // for cross-browser compatibility
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, [noteTitle, noteContent]);
 
     const deleteNote = () => {
         if (noteId === undefined) return
@@ -31,26 +74,75 @@ function NoteSection({noteId, noteController, fetchNotes}: {
 
     return (
         <>
-            {noteId === undefined ?
-                <div className={"w-full h-full bg-primary flex flex-row items-center justify-center"}>
-                    <h1 className={"h1 text-quinary"}>Select a note to view or create a new note</h1>
-                </div>
-                :
-                <div className={"w-full h-full bg-primary p-16 flex flex-col gap-4 relative"}>
-                    <input placeholder={"Untitled..."} type='text' value={noteTitle}
-                           className={"h1 bg-primary border-none focus:outline-none"} onChange={(e) => {
-                        setNoteTitle(() => e.target.value)
-                    }}/>
-                    <textarea placeholder={"Empty note"} value={noteContent}
-                              className={"p bg-primary border-none focus:outline-none w-full min-h-full py-8"}
-                              onChange={(e) => {
-                                  setNoteContent(() => e.target.value)
-                              }}/>
-                    <button className={"delete-note-button"} onClick={() => {
-                        deleteNote()
-                    }}><img src="/src/assets/bin_icon.svg" className={"h-6"}/></button>
-                </div>
-            }
+            <div className={"w-full h-full bg-primary p-16 flex flex-col gap-4 relative"}>
+                <input placeholder={"Untitled..."} type='text' value={noteTitle}
+                       className={"h1 bg-primary border-none focus:outline-none"} onChange={(e) => {
+                    setNoteTitle(() => e.target.value)
+                }}
+                       onBlur={() => {
+                           let currentNoteContent = noteContent;
+                           let currentNoteTitle = noteTitle;
+
+                           // make currentNoteContent safe for JSON.parse
+                           if (currentNoteContent.includes("|")) {
+                               currentNoteContent = currentNoteContent.replace(/\|/g, " ");
+                           }
+                           if (currentNoteTitle.includes("|")) {
+                               currentNoteTitle = currentNoteTitle.replace(/\|/g, " ");
+                           }
+                           if (currentNoteContent.includes(";")) {
+                               currentNoteContent = currentNoteContent.replace(";", " ");
+                           }
+                           if (currentNoteTitle.includes(";")) {
+                               currentNoteTitle = currentNoteTitle.replace(";", " ");
+                           }
+
+                           const note: Note = {
+                               id: noteId,
+                               title: currentNoteTitle,
+                               content: currentNoteContent,
+                               userId: userId
+                           }
+                           noteController.saveNote(note)
+                           fetchNotes();
+                       }}/>
+                <textarea placeholder={"Empty note"} value={noteContent}
+                          className={"p bg-primary border-none focus:outline-none w-full min-h-full py-8"}
+                          onChange={(e) => {
+                              setNoteContent(() => e.target.value)
+                          }}
+                          onBlur={() => {
+                              let currentNoteContent = noteContent;
+                              let currentNoteTitle = noteTitle;
+
+                              // make currentNoteContent safe for JSON.parse
+                              if (currentNoteContent.includes("|")) {
+                                  currentNoteContent = currentNoteContent.replace(/\|/g, " ");
+                              }
+                              if (currentNoteTitle.includes("|")) {
+                                  currentNoteTitle = currentNoteTitle.replace(/\|/g, " ");
+                              }
+                              if (currentNoteContent.includes(";")) {
+                                  currentNoteContent = currentNoteContent.replace(";", " ");
+                              }
+                              if (currentNoteTitle.includes(";")) {
+                                  currentNoteTitle = currentNoteTitle.replace(";", " ");
+                              }
+
+                              const note: Note = {
+                                  id: noteId,
+                                  title: currentNoteTitle,
+                                  content: currentNoteContent,
+                                  userId: userId
+                              }
+                              noteController.saveNote(note)
+                              fetchNotes();
+                          }}
+                />
+                <button className={"delete-note-button"} onClick={() => {
+                    deleteNote()
+                }}><img src="/src/assets/bin_icon.svg" className={"h-6"}/></button>
+            </div>
         </>
     )
 }

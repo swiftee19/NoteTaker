@@ -50,11 +50,12 @@ export class NoteRepository {
 
         for (let i = 0; i < noteCookieDataList.length; i++) {
             const note: Note = JSON.parse(noteCookieDataList[i]);
+
             if (note.id === noteId) {
                 return note;
             }
-        }
 
+        }
         return null;
     }
 
@@ -112,6 +113,11 @@ export class NoteRepository {
         }
 
         const newNotes = notes.filter(note => note.id !== noteId);
+
+        if (newNotes.length === 0) {
+            this.db.eraseCookie("notes")
+            return
+        }
 
         const noteString = this.convertNotesToString(newNotes);
 
