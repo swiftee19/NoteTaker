@@ -92,7 +92,7 @@ function SignUpPage() {
                     className={"w-2/5 bg-primary py-1 text-quaternary font-bold rounded-lg shadow-md duration-300 border-2 border-quaternary hover:bg-quaternary hover:text-primary"}
                     onClick={() => signin()}>Sign in
                 </button>
-                <Link to="/" className={"text-quaternary hover:underline hover:cursor-pointer"}>Create an account</Link>
+                <Link to="/" className={"text-quaternary hover:underline hover:cursor-pointer"}>Log into your account</Link>
             </div>
         </>
     );

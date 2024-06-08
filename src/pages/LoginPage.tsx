@@ -17,7 +17,7 @@ function LoginPage() {
 
     useEffect(() => {
         if (authContext.loading === false && authContext.user !== null) {
-            navigate("/home")
+            navigate("home")
         }
     }, [authContext.user, authContext.loading]);
 
@@ -29,7 +29,7 @@ function LoginPage() {
         if (alertType !== null) {
             setTimeout(() => {
                 closeAlert();
-            }, 3000);
+            }, 1300);
         }
     }, [alertType]);
 
@@ -90,7 +90,7 @@ function LoginPage() {
                     className={"w-2/5 bg-primary py-1 text-quaternary font-bold rounded-lg shadow-md duration-300 border-2 border-quaternary hover:bg-quaternary hover:text-primary"}
                     onClick={() => login()}>Login
                 </button>
-                <Link to="/signin" className={"text-quaternary hover:underline hover:cursor-pointer"}>Create an
+                <Link to="signup" className={"text-quaternary hover:underline hover:cursor-pointer"}>Create an
                     account</Link>
             </div>
         </>
