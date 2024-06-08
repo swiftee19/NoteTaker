@@ -72,7 +72,7 @@ export class NoteRepository {
         }
 
         const noteString = this.convertNotesToString(noteList)
-        this.db.setCookie("notes", noteString, 1)
+        this.db.setCookie("notes", noteString, 7)
     }
 
     updateNote(note: Note) {
@@ -97,7 +97,7 @@ export class NoteRepository {
 
         const noteString = this.convertNotesToString(notes);
 
-        this.db.setCookie("notes", noteString, 1)
+        this.db.setCookie("notes", noteString, 7)
     }
 
     deleteNote(noteId: string) {
@@ -121,6 +121,6 @@ export class NoteRepository {
 
         const noteString = this.convertNotesToString(newNotes);
 
-        this.db.setCookie("notes", noteString, 1)
+        this.db.setCookie("notes", noteString, 7)
     }
 }

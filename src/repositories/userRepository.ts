@@ -90,7 +90,7 @@ export class UserRepository {
             }
         }
 
-        this.db.setCookie("users", userString, 1)
+        this.db.setCookie("users", userString, 7)
     }
 
     deleteUser(userId: string) {
