@@ -13,13 +13,13 @@ function App() {
                     <Route path={'/'} element={
                         <LoginPage/>
                     }/>
-                    <Route path={'/signin'} element={
+                    <Route path={'signin'} element={
                         <SigninPage/>
                     }/>
-                    <Route path={'/home/:noteId'} element={
+                    <Route path={'home/:noteId'} element={
                         <PrivateRoute path="/home" element={<HomePage/>}/>
                     }/>
-                    <Route path={'/home'} element={
+                    <Route path={'home'} element={
                         <PrivateRoute path="/home" element={<HomePage/>}/>
                     }/>
                 </Routes>
