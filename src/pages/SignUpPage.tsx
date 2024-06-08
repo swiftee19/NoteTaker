@@ -57,7 +57,7 @@ function SignUpPage() {
         <>
             {alertType != null && <Alert alertMessage={alertMessage} alertType={alertType} closeAlert={closeAlert}/>}
             <div className={"w-screen h-screen bg-primary flex flex-col items-center justify-center gap-2"}>
-                <h1 className={"text-2xl font-bold"}>Start writing notes with us</h1>
+                <h1 className={"text-2xl font-bold"}>Create an account</h1>
                 <div className={"w-2/5 flex flex-row shadow-md rounded-2xl"}>
                     <div className={"w-2/5 bg-white flex flex-col justify-center items-center rounded-l-2xl p-4"}>
                         <img className={"w-1/2"} src="/pencil_icon.svg"/>
