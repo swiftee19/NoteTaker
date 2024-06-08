@@ -59,7 +59,7 @@ function SigninPage() {
                 <h1 className={"text-2xl font-bold"}>Start writing notes with us</h1>
                 <div className={"w-2/5 flex flex-row shadow-md rounded-2xl"}>
                     <div className={"w-2/5 bg-white flex flex-col justify-center items-center rounded-l-2xl p-4"}>
-                        <img className={"w-1/2"} src="/src/assets/pencil_icon.svg"/>
+                        <img className={"w-1/2"} src="/pencil_icon.svg"/>
                         <p className={"text-quaternary text-center w-full"}>Start writing with us.</p>
                     </div>
                     <form

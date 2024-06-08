@@ -33,7 +33,7 @@ function Sidebar({userNotes, authContext, fetchNote}: { userNotes: Note[], authC
             <div className={"relative h-screen w-52 p-4 flex flex-col gap-4 justify-start rounded-r-lg bg-secondary"}>
                 <h2 className={"font-bold text-lg text-quinary text-left w-fit"}>{greetings}, {user.name}</h2>
                 <button className={"sidebar-button"} onClick={() => startNewNote()}>
-                    <img src="/src/assets/plus_icon.svg" alt={"plus icon"} className={"h-6"}/>
+                    <img src="/plus_icon.svg" alt={"plus icon"} className={"h-6"}/>
                     <h3 className={"font-medium text-lg w-fit"}>New Note</h3>
                 </button>
                 <h2 className={"font-bold text-lg text-quinary text-left w-fit"}>Created Notes</h2>
@@ -48,7 +48,7 @@ function Sidebar({userNotes, authContext, fetchNote}: { userNotes: Note[], authC
                     }
                 </div>
                 <button className={"logout-button"} onClick={() => logout()}>
-                    <img src="/src/assets/logout_icon.svg" alt={"plus icon"} className={"h-6"}/>
+                    <img src="/logout_icon.svg" alt={"plus icon"} className={"h-6"}/>
                     <h3 className={"font-medium text-lg w-fit"}>Logout</h3>
                 </button>
             </div>

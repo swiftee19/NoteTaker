@@ -141,7 +141,7 @@ function NoteSection({noteId, noteController, fetchNotes, userId}: {
                 />
                 <button className={"delete-note-button"} onClick={() => {
                     deleteNote()
-                }}><img src="/src/assets/bin_icon.svg" className={"h-6"}/></button>
+                }}><img src="/bin_icon.svg" className={"h-6"}/></button>
             </div>
         </>
     )
