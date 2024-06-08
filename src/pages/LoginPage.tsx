@@ -3,7 +3,7 @@ import {AlertTypes} from "../helper/alertTypes.ts";
 import {Alert} from "../components/Alert.tsx";
 import {getRandomQuote} from "../helper/quotes.ts";
 import {useAuth} from "../auth/AuthProvider.tsx";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function LoginPage() {
     const [email, setEmail] = useState<string>("")
@@ -90,8 +90,8 @@ function LoginPage() {
                     className={"w-2/5 bg-primary py-1 text-quaternary font-bold rounded-lg shadow-md duration-300 border-2 border-quaternary hover:bg-quaternary hover:text-primary"}
                     onClick={() => login()}>Login
                 </button>
-                <a href="/signin" className={"text-quaternary hover:underline hover:cursor-pointer"}>Create an
-                    account</a>
+                <Link to="/signin" className={"text-quaternary hover:underline hover:cursor-pointer"}>Create an
+                    account</Link>
             </div>
         </>
     )

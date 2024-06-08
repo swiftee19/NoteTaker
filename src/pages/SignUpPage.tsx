@@ -3,8 +3,9 @@ import {Alert} from "../components/Alert.tsx";
 import {useEffect, useState} from "react";
 import {AlertTypes} from "../helper/alertTypes.ts";
 import {User} from "../helper/user.ts";
+import {Link} from "react-router-dom";
 
-function SigninPage() {
+function SignUpPage() {
     const [name, setName] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -91,10 +92,10 @@ function SigninPage() {
                     className={"w-2/5 bg-primary py-1 text-quaternary font-bold rounded-lg shadow-md duration-300 border-2 border-quaternary hover:bg-quaternary hover:text-primary"}
                     onClick={() => signin()}>Sign in
                 </button>
-                <a href="/" className={"text-quaternary hover:underline hover:cursor-pointer"}>Login to my account</a>
+                <Link to="/" className={"text-quaternary hover:underline hover:cursor-pointer"}>Create an account</Link>
             </div>
         </>
     );
 }
 
-export default SigninPage;
+export default SignUpPage;
